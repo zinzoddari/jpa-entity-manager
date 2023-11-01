@@ -12,11 +12,17 @@ public class Snapshot {
 
     public Snapshot(Object id, Object object) {
         this.id = id;
-        this.object = initObject(object);
-        this.values = Values.of(object);
+        if(object != null) {
+            this.object = initObject(object);
+            this.values = Values.of(object);
+        }
     }
 
     private Object initObject(Object object) {
+        if(object == null) {
+            return null;
+        }
+
         try {
             Object destination = object.getClass().getDeclaredConstructor().newInstance();
             for (Field field : object.getClass().getDeclaredFields()) {

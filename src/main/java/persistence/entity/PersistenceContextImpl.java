@@ -45,7 +45,7 @@ public class PersistenceContextImpl implements PersistenceContext {
         if (!snapshotMap.containsKey(key)) {
             return (T) snapshotMap.put(key, new Snapshot(input, persister.findById(input)));
         }
-        return null;
+        return (T) new Snapshot(input, null);
     }
 
     @Override

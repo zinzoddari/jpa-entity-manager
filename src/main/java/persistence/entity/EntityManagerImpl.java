@@ -46,8 +46,8 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     @Override
-    public <T> void remove(T t, Object arg) {
-        final EntityPersister<?> persister = getPersister(t.getClass());
+    public <T> void remove(Class<T> tClass, Object arg) {
+        final EntityPersister<?> persister = getPersister(tClass);
         int id = persister.getHashCode(arg);
 
         persistenceContext.removeEntity(id);

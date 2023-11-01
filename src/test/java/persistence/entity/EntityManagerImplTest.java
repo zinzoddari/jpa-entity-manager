@@ -203,7 +203,7 @@ class EntityManagerImplTest {
             SelectPerson person = entityManager.persist(request);
 
             //when
-            entityManager.remove(person, id);
+            entityManager.remove(person.getClass(), id);
             entityManager.flush();
 
             //then
@@ -218,7 +218,7 @@ class EntityManagerImplTest {
             final Person person = new Person(id, "zz", 3, "xx", 3);
 
             //when & then
-            assertThrows(RuntimeException.class, () -> entityManager.remove(person, id));
+            assertThrows(RuntimeException.class, () -> entityManager.remove(person.getClass(), id));
         }
     }
 
@@ -276,7 +276,7 @@ class EntityManagerImplTest {
 
             //when
             entityManager.persist(selectPerson);
-            entityManager.remove(selectPerson, id); // 최종 remove만 실행 되어야 함
+            entityManager.remove(selectPerson.getClass(), id); // 최종 remove만 실행 되어야 함
             entityManager.flush();
 
             //when
